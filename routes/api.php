@@ -16,3 +16,11 @@ Route::get('/test', function (Request $request) {
 
 Route::post('/clubs', [ClubController::class, "store"]);
 
+Route::get('/clubs', [ClubController::class, "index"]);
+
+Route::get('/clubs/{id}',[ClubController::class, 'show']);
+
+Route::delete('/clubs/{id}',[ClubController::class, 'destroy']);
+
+Route::put('/clubs/{id}' , [ClubController::class, 'update']);
+
