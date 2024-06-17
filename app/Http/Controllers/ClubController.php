@@ -2,40 +2,43 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreClubRequest;
+use App\Http\Requests\UpdateClubRequest;
+use App\Http\Resources\ClubResource;
 use Illuminate\Http\Request;
 use App\Models\Club;
 
 class ClubController extends Controller
 {
-    public function store(Request $request) {
+    public function store(StoreClubRequest $request) {
         $club = new Club();
         $club->name = $request->name;
         $club->save();
-        return response()->json($club);
+        return new ClubResource($club);
     }
 
     public function index(){
         $clubs = Club::all();
-        return response()->json($clubs);
+        return ClubResource::collection($clubs);
     }
 
     public function show($id){
         $club = Club::findorfail($id);
-        return response()->json($club);
+        return new ClubResource($club);
     }
 
     public function destroy($id){
 
         $club = Club::findorfail($id);
         $club->delete();
-        return response()->json($club);
+        return new ClubResource($club);
     }
 
-    public function update(Request $request, $id){
+    public function update(UpdateClubRequest $request, $id){
         $club = Club::findorfail($id);
         $club->name = $request->name;
         $club->save();
-        return response()->json($club);
+        return new ClubResource($club);
     }
 
 }
