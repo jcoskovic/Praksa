@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClubController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,13 +15,7 @@ Route::get('/test', function (Request $request) {
     return 'test';
 });
 
-Route::post('/clubs', [ClubController::class, "store"]);
 
-Route::get('/clubs', [ClubController::class, "index"]);
-
-Route::get('/clubs/{id}',[ClubController::class, 'show']);
-
-Route::delete('/clubs/{id}',[ClubController::class, 'destroy']);
-
-Route::put('/clubs/{id}' , [ClubController::class, 'update']);
+Route::resource('clubs', ClubController::class)->only(['store' , 'update' , 'show' , 'index' , 'destroy']);
+Route::resource('users', UserController::class)->only([ 'index', 'show', 'destroy', 'store', 'update' ]);
 

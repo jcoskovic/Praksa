@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateClubRequest extends FormRequest
+class UpdateUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,8 @@ class UpdateClubRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|unique:clubs,name,' .$this->route('club') . '|min:3'
+            'name' => 'sometimes|string|max:255',
+            'email' => 'sometimes|email|unique:users,email' .$this->route('user'),
         ];
     }
 }
