@@ -11,6 +11,10 @@ class Club extends Model
     use HasFactory;
     use SoftDeletes;
 
+    public function supervisor() {
+        return $this->belongsTo(User::class, 'supervisor_id');
+      }
+
     
     
 }
