@@ -45,4 +45,8 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function supervisedClubs() {
+        return $this->hasMany(Club::class, 'supervisor_id');
+      }
 }
