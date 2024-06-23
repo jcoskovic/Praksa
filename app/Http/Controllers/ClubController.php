@@ -7,19 +7,22 @@ use App\Http\Requests\UpdateClubRequest;
 use App\Http\Resources\ClubResource;
 use Illuminate\Http\Request;
 use App\Models\Club;
+use App\Models\User;
 
 class ClubController extends Controller
 {
     public function index(){
         $clubs = Club::all();
-        return ClubResource::collection($clubs);
+        $supervisors = User::all();
+        return view('clubs', ['clubs' => $clubs, 'supervisors' => $supervisors]);
     }
 
     public function store(StoreClubRequest $request) {
         $club = new Club();
         $club->name = $request->name;
+        $club->supervisor_id = $request->supervisor_id;
         $club->save();
-        return new ClubResource($club);
+        return redirect()->route('clubs.index');
     }
 
    
