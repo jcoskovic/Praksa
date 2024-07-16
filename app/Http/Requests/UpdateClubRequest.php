@@ -22,7 +22,8 @@ class UpdateClubRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|unique:clubs,name,' .$this->route('club') . '|min:3'
+            'name' => 'required|string|unique:clubs,name,' .$this->route('club') . '|min:3',
+            'supervisor_id' => 'required|exists:users,id'
         ];
     }
 }

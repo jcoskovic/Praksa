@@ -18,6 +18,7 @@ class ClubController extends Controller
     public function store(StoreClubRequest $request) {
         $club = new Club();
         $club->name = $request->name;
+        $club->supervisor()->associate($request->supervisor_id);
         $club->save();
         return new ClubResource($club);
     }
@@ -31,6 +32,7 @@ class ClubController extends Controller
     public function update(UpdateClubRequest $request, $id){
         $club = Club::findorfail($id);
         $club->name = $request->name;
+        $club->supervisor()->associate($request->supervisor_id);
         $club->save();
         return new ClubResource($club);
     }

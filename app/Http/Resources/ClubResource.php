@@ -17,6 +17,7 @@ class ClubResource extends JsonResource
         return [
             'name' => $this->name,
             'id' => $this->id,
+            'supervisor' => new UserResource($this->supervisor),
         ];
     }
 }
